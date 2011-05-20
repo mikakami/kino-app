@@ -1,0 +1,293 @@
+body, html {
+  margin:0px;
+  padding:0px;
+  padding: 0 0 0 0;
+  background-color: #ffffef;
+
+}
+#container_page {
+	white-space: nowrap;
+	min-width: 1170px;
+	background-color: #ffffe5f
+	width: 100%;
+	height: 100%;
+}
+#header{
+  white-space: nowrap;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-right: 100px;
+  text-align: right;
+}
+#theaters_list{
+  display: block;
+  white-space: nowrap;
+  width:150px;
+  height: 300px;
+  float:left;
+  padding-left: 30px;
+}
+#theaters_list a {
+  font-family: 'Philosopher', arial, serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  text-shadow: 2px 2px 2px #ddd;
+  text-decoration: none;
+  letter-spacing: 0.027em;
+  word-spacing: -0.025em;
+  line-height: 1.21;
+  color: #887777;
+}
+#toolbar {
+    display: none;
+    white-space: nowrap;
+	float:right;
+	width:200px;
+	height: 300px;
+	padding 20 20 20 20;
+  	margin-right: 20px;
+}
+#toolbar a {
+  text-decoration: none;
+  color:black;
+  font-family: 'Irish Grover', serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  text-shadow: 2px 2px 2px #ddd;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0em;
+  word-spacing: 0em;
+  line-height: 1.2; 
+  margin-left: 40px;
+  color: #887777;  
+}
+#container_shows {
+  min-height: 500px;
+  min-width: 700px;	  
+  border-right:1px solid #887777;
+  border-left: 1px solid #887777;    	
+  display: none;
+  white-space: nowrap;
+  margin:0px;
+  margin-left: 200px;
+  margin-right: 240px;  
+  padding: 0 20 0 20;
+  //width: expression(document.body.clientWidth - 440 + "px");  
+  //position: absolute;
+  //left: 160px;
+  //margin-left: 0px;
+}
+#status {
+  white-space: nowrap;
+}
+#status .gwt-Image {
+	padding: 7 20 0 20;
+}
+#status .title  {
+  white-space: nowrap;	
+  font-family: 'Philosopher', serif;  	
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 100;
+  text-shadow: 2px 2px 2px #aaa;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0em;
+  word-spacing: 0em;
+  line-height: 1.0;
+  color: #887777;  
+}
+#status .status  {
+  white-space: nowrap;	
+  font-family: 'Raleway', serif; 
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 100;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0em;
+  word-spacing: 0em;
+  line-height: 1.0;
+  color: #887777;  
+  padding-top: 5;
+}
+.panel {
+  white-space: nowrap;	
+  padding: 5 20 10 5;	
+  border: 1px solid #887777;	
+}
+#shows_list{
+  white-space: nowrap;
+  padding-top: 20px;
+  padding-left: 5px;
+  text-align: right;
+}
+#shows_list a {
+  white-space: nowrap;	
+  font-family: 'Philosopher', arial, serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 50;
+  text-shadow: 2px 2px 2px #ddd;
+  text-decoration: none;
+  letter-spacing: 0.027em;
+  word-spacing: -0.000em;
+  line-height: 1.21;
+  color: #887777;
+}
+.daysGrid {
+  white-space: nowrap;	
+  padding-right: 0px;
+}
+.daysGrid .gwt-Label {
+  white-space: nowrap;	
+  padding-left: 1px;
+}
+.showsGrid {
+  white-space: nowrap;	
+  padding-left: 30px;
+  cellpadding: 5px;
+}
+#footer {
+  display: block;
+/*  background-color: #86866c; */
+  width: 100%;
+  margin-top: 10px;
+  height: 1px;
+}
+#font01 {
+  font-family: 'Philosopher', serif;
+  font-size: 50px;
+  font-style: bold;
+  font-weight: 400;
+  text-shadow: 2px 2px 2px #aaa;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0.027em;
+  word-spacing: -0.025em;
+  line-height: 1.21;
+  color: #665555;
+}
+#font02 {
+  font-family: 'Philosopher', serif;
+  font-size: 20px;
+  font-style: bold;
+  font-weight: 400;
+  text-shadow: 2px 2px 2px #ddd;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0.027em;
+  word-spacing: -0.025em;
+  line-height: 1.21;
+  color: #443333;
+}
+
+.font03 {
+  font-family: 'Philosopher', serif;
+  font-size: 20px;
+  font-style: bold;
+  font-weight: 400;
+  text-shadow: 2px 2px 2px #ddd;
+  letter-spacing: 0.027em;
+  word-spacing: -0.025em;
+  line-height: 1.21;
+  text-align: left;
+  padding-left: 20px;  
+  color: #443333;
+}
+#font04 a {
+  font-family: 'Annie Use Your Telescope', serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  text-shadow: none;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0em;
+  word-spacing: 0em;
+  line-height: 1.2;
+  color: #665555;
+}
+
+.selected {
+  color: black;	
+  font-weight: 700; 
+  text-shadow: none;
+}
+.shows00{
+  font-family: 'PT+Serif', serif;
+  font-size: 20px;
+  font-style: bold;
+  font-weight: 400;
+  text-shadow: 1px 1px 1px #ddd;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0.027em;
+  word-spacing: -0.025em;
+  line-height: 1.21;
+  color: #443333;	
+  padding-top: 10px;
+}
+.shows01 {
+  font-family: 'PT+Serif', serif;
+  font-size: 14px;
+  font-weight: 400;
+  text-shadow: 1px 1px 1px #ddd;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0.027em;
+  word-spacing: -0.025em;
+  line-height: 1.21;
+  color: #443333;	
+}
+.shows02 {
+  padding-left:  20px;
+  padding-right: 20px;
+  text-shadow: 1px 1px 1px #ddd;
+}
+.shows021 { 
+  padding-left:  20px;
+  padding-right: 20px; /*
+  text-shadow: 1px 1px 1px #ddd;
+  font-family: 'PT+Serif', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #443333; /**/  
+  white-space: nowrap;	
+  font-family: 'Philosopher', arial, serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 50;
+  text-shadow: 2px 2px 2px #ddd;
+  text-decoration: none;
+  letter-spacing: 0.027em;
+  word-spacing: -0.000em;
+  line-height: 1.21;
+  color: #887777;  
+}
+.shows03 {
+  font-family: 'PT+Serif', serif;
+  font-size: 14px;
+  font-weight: 400;
+  text-shadow: 1px 1px 1px #ddd;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0.027em;
+  word-spacing: -0.025em;
+  line-height: 1.21;
+  color: #443333;
+}
+/**/
+
+  /*background-color: #FFFFFF; /* fallback color if gradients are not supported */
+/*
+  background-image: -webkit-gradient(linear, left top, right top, from(hsl(0, 80%, 70%)), to(#BADA55)); 
+  background-image: -webkit-linear-gradient(top, hsl(0, 80%, 70%), #BADA55); 
+  background-image:    -moz-linear-gradient(top left, rgba(100,0,0,255), rgba(255,0,0,0)); 
+/*  background-image:     -ms-linear-gradient(top, hsl(0, 80%, 70%), #BADA55); 
+  background-image:      -o-linear-gradient(top, hsl(0, 80%, 70%), #BADA55); 
+  background-image:         linear-gradient(top, hsl(0, 80%, 70%), #BADA55); /* standard, but currently unimplemented */
+/**/

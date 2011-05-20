@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='kino'>
+
+  <inherits name='com.google.gwt.user.User'/>
+  
+  <inherits name='com.google.gwt.user.theme.chrome.Chrome'/>
+
+  <inherits name='ws.softlabs.lib.kino.model.model'/>
+
+  <entry-point class='ws.softlabs.kino.client.KinoApp'/>
+
+  <source path='client'/>
+  <source path='shared'/>
+
+</module>
