@@ -12,10 +12,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 import ws.softlabs.kino.client.intf.KinoDataService;
 import ws.softlabs.lib.kino.dao.server.intf.DataService;
 import ws.softlabs.lib.kino.dao.server.service.pmf.PMFModelDataService;
-import ws.softlabs.lib.kino.dao.server.util.DAOResultUtils;
 import ws.softlabs.lib.kino.model.client.Hall;
 import ws.softlabs.lib.kino.model.client.Show;
 import ws.softlabs.lib.kino.model.client.Theater;
@@ -29,6 +30,9 @@ public class KinoDataServiceImpl
 				extends RemoteServiceServlet 
 				implements KinoDataService {
 
+	private static final Logger log = 
+		Logger.getLogger("kino.gwt.service." + KinoDataServiceImpl.class.getSimpleName());
+	
 	private DataService 	dataService = new PMFModelDataService();
 	private KinovlruParser 	parser      = new KinovlruParser(dataService);
 
@@ -52,20 +56,16 @@ public class KinoDataServiceImpl
 		}
 	}
 	public List<Theater> listTheaters() {
-		
-		//dataService.clearDatabase();
-		//return null;/*
-		
 		List<Theater> daoResults   = dataService.getTheaterList();
 		Set<Theater> parserResults = null;
 		if (daoResults != null && daoResults.size() > 0) {
-System.err.println("GOT THEATERS FROM -+= DATASTORE =+-");
+			log.debug("GOT THEATERS FROM -+= DATASTORE =+-");
 			return daoResults;
 		}
 		else 
 			try {
 				parserResults = parser.getTheaters();
-System.err.println("GOT THEATERS FROM -+= PARSER =+-");
+				log.debug("GOT THEATERS FROM -+= PARSER =+-");
 			}
 			catch(Exception ex) {
 				parserResults = null;
@@ -77,14 +77,14 @@ System.err.println("GOT THEATERS FROM -+= PARSER =+-");
 		List<String> result 	= null;
 		if (daoResults != null && daoResults.size() > 0) {
 			result = sortDays(daoResults);
-System.err.println("GOT DAYS FROM -+= DATASTORE =+-");
+			log.debug("GOT DAYS FROM -+= DATASTORE =+-");
 		}
 		else {
 			try {
 				List<String> set = parser.getTheaterShowDays(theater);
 				if (set != null) {
 					result = sortDays(set);
-System.err.println("GOT DAYS FROM -+= PARSER =+-");
+					log.debug("GOT DAYS FROM -+= PARSER =+-");
 				}
 			}
 			catch(Exception ex) {
@@ -94,38 +94,37 @@ System.err.println("GOT DAYS FROM -+= PARSER =+-");
 		return result;
 	}
 	public List<Object>  listShows(Theater theater, String date) {
-//System.err.println("Entered 'listShows' at KinoDataServiceImpl. Theater = " + theater);
+		log.debug("ENTER (theater = " + theater + ")");
 		List<Hall> halls = dataService.getTheaterHallList(theater);
-DAOResultUtils.printHallList("KinoDataServiceImpl.listShows", halls);
 		List<Object> result = null;
 		if (halls == null || halls.isEmpty()) {
-System.err.println("CAN'T GET HALLS FROM DATASTORE");
+			log.debug("CAN'T GET HALLS FROM DATASTORE");
 			try {
 				halls = new ArrayList<Hall>(parser.getHalls(theater));
-System.err.println("GOT HALLS FROM -+= PARSER =+-");
+				log.debug("GOT HALLS FROM -+= PARSER =+-");
 			} catch(Exception ex) {
 				System.out.println(ex);
 				halls = null;
 			}
 		}
 		else
-System.err.println("GOT HALLS FROM -+= DATASTORE =+-");
+			log.debug("GOT HALLS FROM -+= DATASTORE =+-");
 
 		if (halls != null) {
 			result = new ArrayList<Object>();
 			for(Hall hall : halls) {
 				if (hall.getName() != null)
 					result.add(hall);
-				List<Show> shows = dataService.getShowList(hall, DateUtils.stringToDate(date));
+				List<Show> shows = dataService.getShowList(hall, DateUtils.dateToMidnight(DateUtils.stringToDate(date)));
 				if (shows == null || shows.size() < 1)
 					try {
 						shows = new ArrayList<Show>(parser.getDayShows(date, hall));
-System.err.println("GOT SHOWS FROM -+= PARSER =+-");
+						log.debug("GOT SHOWS FROM -+= PARSER =+-");
 					} catch(Exception ex) {
 						shows = null;
 					}
 				else
-System.err.println("GOT SHOWS FROM -+= DATASTORE =+-");
+					log.debug("GOT SHOWS FROM -+= DATASTORE =+-");
 				if (shows != null) {
 					for(Show show : shows) {
 						result.add(show);
@@ -178,6 +177,85 @@ System.err.println("GOT SHOWS FROM -+= DATASTORE =+-");
 	}
 	public List<Show> stubListShow() {
 		return new ArrayList<Show>();
-	}	
+	}
+	public List<String> loadDataFromDB(String param) {
+		// "theaters", "halls" , "days", "movies", "shows", "clear"
+		if (param == null || param.isEmpty()) {
+			return null;
+		}
+		else if ("theaters".equalsIgnoreCase(param)) {
+			log.debug("asking for RAW theaters");
+			return dataService.getRawTheaterList();
+		} else if ("halls".equalsIgnoreCase(param)) {
+			log.debug("asking for RAW halls");
+			return dataService.getRawHallList();
+		} else if ("days".equalsIgnoreCase(param)) { 
+			log.debug("asking for RAW days");
+			return dataService.getRawDayList();
+		} else if ("movies".equalsIgnoreCase(param)) {
+			log.debug("asking for RAW movies");
+			return dataService.getRawMovieList();
+		} else if ("shows".equalsIgnoreCase(param)) {
+			log.debug("asking for RAW shows");
+			return dataService.getRawShowList();
+		} else {
+			return null;
+		}
+	}
+	public void clearDatabase() {
+		dataService.clearDatabase();		
+	}
+	public void clearDatabase(String type) {
+		// "theaters", "halls" , "days", "movies", "shows"
+		log.debug("ENTER (type = " + type + ")");
 
+		if ("theaters".equalsIgnoreCase(type)) {
+			log.debug("clearing PTheaters");
+			dataService.clearTheaters();
+		} else if ("halls".equalsIgnoreCase(type)) {
+			log.debug("clearing PHalls");
+			dataService.clearHalls();
+		} else if ("days".equalsIgnoreCase(type) || "shows".equalsIgnoreCase(type)) {
+			log.debug("clearing PShows");
+			dataService.clearShows();
+		} else if ("movies".equalsIgnoreCase(type)) {
+			log.debug("clearing PMovies");
+			dataService.clearMovies();
+		}
+		log.debug("EXIT");
+	}
+
+	public void loadTheaters() {
+		try {
+			parser.getTheaters();
+			log.debug("GOT THEATERS FROM PARSER");
+		}
+		catch(Exception ex) {
+		}		
+	}
+	public void loadHalls(Theater theater) {
+		try {
+			parser.getHalls(theater);
+			log.debug("GOT HALLS FROM PARSER");
+		}
+		catch(Exception ex) {
+		}		
+	}
+	public void loadDays(Theater theater) {
+		try {
+			parser.getTheaterShowDays(theater);
+			log.debug("GOT DAYS FROM PARSER");
+		}
+		catch(Exception ex) {
+		}		
+	}
+	public void loadShows(Theater theater, String date) {
+		try {
+			Set<Hall> halls = parser.getHalls(theater);
+			if (halls != null)
+				for(Hall h : halls)
+					parser.getDayShows(date, h);
+		} catch (Exception e) {
+		}
+	}
 } 

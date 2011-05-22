@@ -17,8 +17,17 @@ public interface KinoDataServiceAsync {
 	void listTheaters(AsyncCallback<List <Theater>> callback);
 	void listDays(Theater theater, AsyncCallback<List <String>> callback);
 	void listShows(Theater t, String date, AsyncCallback<List <Object>> callback);
-/*  void listHalls(Theater t, AsyncCallback<List <Hall>> callback); */
 	void stubListHall(AsyncCallback<List <Hall>> callback);
 	void stubListShow(AsyncCallback<List <Show>> callback);
+
+	/* tools */
+	void loadDataFromDB(String param, AsyncCallback<List <String>> callback);
+	void clearDatabase(AsyncCallback<Void> callback);
+	void clearDatabase(String type, AsyncCallback<Void> callback);
+
+	void loadTheaters(AsyncCallback<Void> callback);
+	void loadHalls(Theater theater, AsyncCallback<Void> callback);
+	void loadDays(Theater theater, AsyncCallback<Void> callback);
+	void loadShows(Theater theater, String date, AsyncCallback<Void> callback);
 
 }

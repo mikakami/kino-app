@@ -1,4 +1,4 @@
-	
+
 	if (typeof document.onselectstart!="undefined") {
 		document.onselectstart=new Function ("return false");
 	}

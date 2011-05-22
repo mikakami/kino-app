@@ -3,8 +3,243 @@ body, html {
   padding:0px;
   padding: 0 0 0 0;
   background-color: #ffffef;
+  min-width: 1170px;
 
 }
+.header {
+  white-space: nowrap;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-right: 100px;
+  text-align: right;	
+}
+.header .gwt-Image {
+	width: 15px;
+	height: 15px;
+}
+.footer {
+}
+.theaters {
+  display: block;
+  white-space: nowrap;
+  width:150px;
+  height: 300px;
+  float:left;
+  padding-left: 30px;	
+	//background-color: #f00;
+}
+.theaters a {
+  font-family: 'Philosopher', arial, serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  text-shadow: 2px 2px 2px #ddd;
+  text-decoration: none;
+  letter-spacing: 0.027em;
+  word-spacing: -0.025em;
+  line-height: 1.21;
+  color: #887777;
+}
+.theaters a:hover {
+	color: #665555;
+}
+.tools {
+	padding-top: 0px;
+	padding-left: 20px;
+}
+.contents {
+  min-height: 500px;
+  min-width: 700px;	  
+  border-right:1px solid #887777;
+  border-left: 1px solid #887777;   	
+}
+.contents a {
+  font-family: 'Philosopher', serif;
+  font-size: 15px;
+  font-weight: normal;
+  text-shadow: 2px 2px 2px #ddd;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0.027em;
+  word-spacing: -0.025em;
+  line-height: 1.21;
+  color: #443333;
+}
+.contents a:hover {
+  color: #211;
+}
+.daysGrid {
+	padding-top: 20px;
+}
+.daysGrid .selected a {
+  color: #544;	
+  font-weight: 600; 
+}
+.showsGrid {
+  padding-top: 20px;
+  white-space: nowrap;	
+  padding-left: 30px;
+  cellpadding: 5px;
+}
+.status_panel {
+  padding-top: 7px;
+  padding-right: 10px;
+  border: 1px solid #887777;	
+}
+.status_panel .gwt-Image {
+}
+.status_panel .title  {
+  white-space: nowrap;	
+  font-family: 'Philosopher', serif;  	
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 100;
+  text-shadow: 2px 2px 2px #aaa;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0em;
+  word-spacing: 0em;
+  line-height: 1.0;
+  color: #887777;  
+}
+.status_panel .status  {
+  padding-top:  4px;
+  padding-left: 10px;
+  white-space: nowrap;	
+  font-family: 'Raleway', serif; 
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 100;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0em;
+  word-spacing: 0em;
+  line-height: 1.0;
+  color: #887777;  
+}
+.toolsGrid a {
+  font-family: 'Philosopher', serif;
+  font-size: 18px;
+  font-weight: normal;
+  text-shadow: 2px 2px 2px #ddd;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0.027em;
+  word-spacing: -0.025em;
+  line-height: 1.21;
+  color: #443333;	
+}
+.toolsGrid a:hover {
+  color: #443333;	
+}
+.cursor {
+	cursor: pointer;
+}
+.font01 {
+	text-align:right;
+  font-family: 'Philosopher', serif;
+  font-size: 50px;
+  font-style: bold;
+  font-weight: 400;
+  text-shadow: 2px 2px 2px #aaa;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0.027em;
+  word-spacing: -0.025em;
+  line-height: 1.21;
+  color: #665555;
+}
+.font02 {
+  font-family: 'Philosopher', serif;
+  font-size: 20px;
+  font-style: bold;
+  font-weight: 400;
+  text-shadow: 2px 2px 2px #ddd;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0.027em;
+  word-spacing: -0.025em;
+  line-height: 1.21;
+  color: #443333;
+}
+
+.font04 a, .font04 a:visited {
+  font-family: 'Annie Use Your Telescope', serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  text-shadow: none;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0em;
+  word-spacing: 0em;
+  line-height: 1.2;
+  color: #665555;
+}
+.shows01 {
+  font-family: 'PT+Serif', serif;
+  font-size: 14px;
+  font-weight: 400;
+  text-shadow: 1px 1px 1px #ddd;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0.027em;
+  word-spacing: -0.025em;
+  line-height: 1.21;
+  color: #443333;	
+}
+.shows02 {
+  padding-left:  20px;
+  padding-right: 20px;
+  text-shadow: 1px 1px 1px #ddd;
+}
+.shows021 { 
+  padding-left:  20px;
+  padding-right: 20px; /*
+  text-shadow: 1px 1px 1px #ddd;
+  font-family: 'PT+Serif', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #443333;
+  white-space: nowrap;	
+  font-family: 'Philosopher', arial, serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 50;
+  text-shadow: 2px 2px 2px #ddd;
+  text-decoration: none;
+  letter-spacing: 0.027em;
+  word-spacing: -0.000em;
+  line-height: 1.21; /**/
+  color: #887777;  
+}
+.shows03 {
+  font-family: 'PT+Serif', serif;
+  font-size: 14px;
+  font-weight: 400;
+  text-shadow: 1px 1px 1px #ddd;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0.027em;
+  word-spacing: -0.025em;
+  line-height: 1.21;
+  color: #443333;
+}
+.shows00{
+  font-family: 'PT+Serif', serif;
+  font-size: 20px;
+  font-style: bold;
+  font-weight: 400;
+  text-shadow: 1px 1px 1px #ddd;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0.027em;
+  word-spacing: -0.025em;
+  line-height: 1.21;
+  color: #443333;	
+  padding-top: 10px;
+}
+/*
 #container_page {
 	white-space: nowrap;
 	min-width: 1170px;
@@ -153,12 +388,11 @@ body, html {
 }
 #footer {
   display: block;
-/*  background-color: #86866c; */
   width: 100%;
   margin-top: 10px;
   height: 1px;
 }
-#font01 {
+.font01 {
   font-family: 'Philosopher', serif;
   font-size: 50px;
   font-style: bold;
@@ -231,55 +465,7 @@ body, html {
   color: #443333;	
   padding-top: 10px;
 }
-.shows01 {
-  font-family: 'PT+Serif', serif;
-  font-size: 14px;
-  font-weight: 400;
-  text-shadow: 1px 1px 1px #ddd;
-  text-decoration: none;
-  text-transform: none;
-  letter-spacing: 0.027em;
-  word-spacing: -0.025em;
-  line-height: 1.21;
-  color: #443333;	
-}
-.shows02 {
-  padding-left:  20px;
-  padding-right: 20px;
-  text-shadow: 1px 1px 1px #ddd;
-}
-.shows021 { 
-  padding-left:  20px;
-  padding-right: 20px; /*
-  text-shadow: 1px 1px 1px #ddd;
-  font-family: 'PT+Serif', serif;
-  font-size: 15px;
-  font-weight: 700;
-  color: #443333; /**/  
-  white-space: nowrap;	
-  font-family: 'Philosopher', arial, serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 50;
-  text-shadow: 2px 2px 2px #ddd;
-  text-decoration: none;
-  letter-spacing: 0.027em;
-  word-spacing: -0.000em;
-  line-height: 1.21;
-  color: #887777;  
-}
-.shows03 {
-  font-family: 'PT+Serif', serif;
-  font-size: 14px;
-  font-weight: 400;
-  text-shadow: 1px 1px 1px #ddd;
-  text-decoration: none;
-  text-transform: none;
-  letter-spacing: 0.027em;
-  word-spacing: -0.025em;
-  line-height: 1.21;
-  color: #443333;
-}
+
 /**/
 
   /*background-color: #FFFFFF; /* fallback color if gradients are not supported */
