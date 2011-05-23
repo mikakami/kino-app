@@ -12,7 +12,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("kino")
 public interface KinoDataServiceAsync {
 
-	void loadDataFromInternet(AsyncCallback<Void> callback);	
+	//void loadDataFromInternet(AsyncCallback<Void> callback);	
 
 	void listTheaters(AsyncCallback<List <Theater>> callback);
 	void listDays(Theater theater, AsyncCallback<List <String>> callback);

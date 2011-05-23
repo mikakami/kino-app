@@ -17,6 +17,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLTable.Cell;
@@ -335,7 +336,7 @@ public class KinoAppGUI {
 	    theatersPanel = new VerticalPanel();
 	    theatersGrid  = new Grid(1,1);
 
-	    theatersPanel.add(new HTML("<span class=font02>Кинотеатры<br></span>"));
+	    theatersPanel.add(new HTML("<span class=font02>РљРёРЅРѕС‚РµР°С‚СЂС‹<br></span>"));
 	    
 	    theatersPanel.add(theatersGrid);   
 	    
@@ -344,31 +345,37 @@ public class KinoAppGUI {
 	    hide(theatersPanel);
     }
     private void createToolbar() {
-	    final String[] links = {"theaters", "halls" , "days", "movies", "shows", "", "clear all"};
+	    final String[] links = {"", "theaters", "halls" , "days", 
+	    						"movies", "shows", "", "clear all!" , ""
+	    						};
 
     	toolsPanel	   = new VerticalPanel();
   
-	    toolsPanel.add(new HTML("<span class=\"font02\">Инструменты</span>"));
+	    toolsPanel.add(new HTML("<span class=\"font02\">Р�РЅСЃС‚СЂСѓРјРµРЅС‚С‹</span>"));
 	    
-	    final Grid toolLinks = new Grid();
-	    toolLinks.resize(links.length, 3);
+	    final FlexTable toolLinks = new FlexTable();
 	    toolLinks.addStyleName("toolsGrid");
 
 	    
 	    for(int i = 0; i < links.length; i++ ) {
-
-	    	toolLinks.setWidget(i, 0, new Hyperlink(links[i], ""));
-
-	    	if (i < links.length - 2) {
-		    	 Image reload = new Image("/images/reload.png");
-		    	 reload.addStyleName("cursor");
-		    	 Image remove = new Image("/images/remove.png");
-		    	 remove.addStyleName("cursor");
-		    	 toolLinks.setWidget(i, 1, reload);
-		    	 toolLinks.setWidget(i, 2, remove);
+	    	
+	    	if ("".equalsIgnoreCase(links[i])) {
+	    		toolLinks.setWidget(i, 0, new HTML("<hr>"));
+	    		toolLinks.getFlexCellFormatter().setColSpan(i, 0, 3);
+	    	}
+	    	else {
+	    		 String s = new String(links[i]).replaceAll("!", "");
+	    		 toolLinks.setWidget(i, 0, new Hyperlink(s, ""));
+	    		 if (!links[i].contains("!")) {
+			    	 Image reload = new Image("/images/reload.png");
+			    	 reload.addStyleName("cursor");
+			    	 Image remove = new Image("/images/remove.png");
+			    	 remove.addStyleName("cursor");
+			    	 toolLinks.setWidget(i, 1, reload);
+			    	 toolLinks.setWidget(i, 2, remove);
+	    		 }
 	    	}
 	    }
-
 		toolLinks.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				Cell cellForEvent = toolLinks.getCellForEvent(event);
@@ -403,9 +410,12 @@ public class KinoAppGUI {
 					kinoService.clearDatabase();
 		}});
 			
-		toolsPanel.add(toolLinks); /**/
-	    
-	    toolsPanel.addStyleName("tools");
+		/* schedule */
+		
+		toolsPanel.add(toolLinks);
+		toolsPanel.add(new Hyperlink("run cron job", "/cron/load"));
+		/**/
+		toolsPanel.addStyleName("tools");
 	    show(toolsPanel);
     }
     private void createFooter() {

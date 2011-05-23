@@ -36,25 +36,6 @@ public class KinoDataServiceImpl
 	private DataService 	dataService = new PMFModelDataService();
 	private KinovlruParser 	parser      = new KinovlruParser(dataService);
 
-	public void loadDataFromInternet() {
-		try {
-			Set<Theater> theaters = parser.getTheaters();
-			if (theaters != null)
-			for (Theater t : theaters) {
-				List<String> days = parser.getTheaterShowDays(t);
-				if (days != null)
-				for(String d : days) {
-					Set<Hall> halls = parser.getHalls(t);
-					if (halls != null)
-					for(Hall h : halls) {
-						parser.getDayShows(d, h);
-					}
-				}
-			}
-		}
-		catch(Exception ex) {			
-		}
-	}
 	public List<Theater> listTheaters() {
 		List<Theater> daoResults   = dataService.getTheaterList();
 		Set<Theater> parserResults = null;
@@ -135,26 +116,6 @@ public class KinoDataServiceImpl
 		}
 		return result;
 	}	
-	public void printLoadedData() {
-		try {		
-			for(Theater t : dataService.getTheaterList()) {
-				System.out.println(t);
-				for(String d : dataService.getShowDaysList(t)) {
-					System.out.println("\t" + d);
-					for(Hall h : dataService.getTheaterHallList(t)) {
-						System.out.println("\t\t" + h);
-						for(Show s : 
-							dataService.getShowList(h, 
-								DateUtils.stringToDate(d))) {
-							System.out.println("\t\t\t" + s);
-						}
-					}
-				}			
-			}
-		}
-		catch(Exception ex) {			
-		}
-	}	
 	private List<String> sortDays(Collection<String> days) {
 		if (days == null) return null;
 		List<String> result = new ArrayList<String>(days);
@@ -224,7 +185,6 @@ public class KinoDataServiceImpl
 		}
 		log.debug("EXIT");
 	}
-
 	public void loadTheaters() {
 		try {
 			parser.getTheaters();

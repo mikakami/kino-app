@@ -43,9 +43,15 @@ body, html {
 .theaters a:hover {
 	color: #665555;
 }
+.theaters a:VISITED {
+	color: #887777;
+}
 .tools {
 	padding-top: 0px;
 	padding-left: 20px;
+}
+.tools a {
+	padding-right: 20px;
 }
 .contents {
   min-height: 500px;
@@ -68,6 +74,9 @@ body, html {
 .contents a:hover {
   color: #211;
 }
+.contents a:VISITED {
+  color: #443333;	
+}
 .daysGrid {
 	padding-top: 20px;
 }
@@ -75,6 +84,7 @@ body, html {
   color: #544;	
   font-weight: 600; 
 }
+
 .showsGrid {
   padding-top: 20px;
   white-space: nowrap;	

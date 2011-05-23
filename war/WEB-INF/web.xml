@@ -4,18 +4,30 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
+
   <!-- Servlets -->
   <servlet>
     <servlet-name>app</servlet-name>
     <servlet-class>ws.softlabs.kino.server.KinoDataServiceImpl</servlet-class>
+  </servlet>  
+  <servlet>
+    <servlet-name>schedule</servlet-name>
+    <servlet-class>ws.softlabs.kino.server.schedule.ScheduledLoader</servlet-class>
   </servlet>
+    
   <!-- servlet mapping -->
   <servlet-mapping>
     <servlet-name>app</servlet-name>
     <url-pattern>/kino/kino</url-pattern>
+  </servlet-mapping>  
+  <servlet-mapping>
+    <servlet-name>schedule</servlet-name>
+    <url-pattern>/cron/load</url-pattern>
   </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>kinoapp.html</welcome-file>
   </welcome-file-list>
+ 
 </web-app>
