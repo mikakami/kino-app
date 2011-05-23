@@ -3,6 +3,6 @@
 	<cron>
 		<url>/cron/load</url>
 		<description>parse shows data from internet</description>
-		<schedule>every 60 minutes</schedule>
+		<schedule>every 2 minutes</schedule>
 	</cron>
 </cronentries>

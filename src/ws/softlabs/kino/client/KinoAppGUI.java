@@ -336,7 +336,7 @@ public class KinoAppGUI {
 	    theatersPanel = new VerticalPanel();
 	    theatersGrid  = new Grid(1,1);
 
-	    theatersPanel.add(new HTML("<span class=font02>РљРёРЅРѕС‚РµР°С‚СЂС‹<br></span>"));
+	    theatersPanel.add(new HTML("<span class=font02>Кинотеатры<br></span>"));
 	    
 	    theatersPanel.add(theatersGrid);   
 	    
@@ -351,7 +351,7 @@ public class KinoAppGUI {
 
     	toolsPanel	   = new VerticalPanel();
   
-	    toolsPanel.add(new HTML("<span class=\"font02\">Р�РЅСЃС‚СЂСѓРјРµРЅС‚С‹</span>"));
+	    toolsPanel.add(new HTML("<span class=\"font02\">Инструменты</span>"));
 	    
 	    final FlexTable toolLinks = new FlexTable();
 	    toolLinks.addStyleName("toolsGrid");
@@ -410,9 +410,9 @@ public class KinoAppGUI {
 					kinoService.clearDatabase();
 		}});
 			
-		/* schedule */
-		
+				
 		toolsPanel.add(toolLinks);
+		// schedule
 		toolsPanel.add(new Hyperlink("run cron job", "/cron/load"));
 		/**/
 		toolsPanel.addStyleName("tools");

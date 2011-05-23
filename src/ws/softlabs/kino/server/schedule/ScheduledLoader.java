@@ -27,7 +27,7 @@ public class ScheduledLoader extends HttpServlet {
 		Logger.getLogger("kino.gwt.service." + ScheduledLoader.class.getSimpleName());
 	
 	private static boolean processing = false;
-	private static long PARSE_TIMEOUT = 1000 * 60;// * 60 * 6 ;
+	private static long PARSE_TIMEOUT = 1000 * 60;// * 60 * 6 ; // 3 HOURS
 									  // ms     s    m   h
 	private DataService 	dataService = new PMFModelDataService();
 	private KinovlruParser 	parser      = new KinovlruParser(dataService);
@@ -41,11 +41,12 @@ public class ScheduledLoader extends HttpServlet {
 			return;
 		}
 
+		/*
 		boolean isCron = Boolean.parseBoolean(req.getParameter("X-AppEngine-Cron"));
 		if (!isCron) {
 			log.debug("NON-CRON REQUEST");
 			return;
-		}
+		}/**/
 		
 		boolean startLoad = false;		
 		PersistenceManager pm = PMF.getPersistenceManager();
@@ -53,9 +54,10 @@ public class ScheduledLoader extends HttpServlet {
 			ScheduleLog scheduleLog = null;
 			Query query = pm.newQuery(ScheduleLog.class);
 			List<ScheduleLog> result = (List<ScheduleLog>)query.execute();
-			if (result != null) {
+			if (result != null && !result.isEmpty()) {
 				scheduleLog = result.get(0);
 			} 
+			
 			if (scheduleLog != null) {
 				if (scheduleLog.lastRunTS < System.currentTimeMillis() - PARSE_TIMEOUT) {
 					log.debug("STARTING LOAD...");
@@ -69,7 +71,8 @@ public class ScheduledLoader extends HttpServlet {
 			} else {
 				scheduleLog = new ScheduleLog();
 				startLoad = true;
-			}			
+			}
+			
 			if (startLoad) {
 				processing = true;
 				log.debug("START LOAD");
@@ -77,11 +80,13 @@ public class ScheduledLoader extends HttpServlet {
 				loadDataFromInternet();
 				scheduleLog.lastTimeTS = System.currentTimeMillis() - scheduleLog.lastRunTS;
 				log.debug("STOP LOAD");
+				log.debug("load complete in " + scheduleLog.lastTimeTS / 1000 + " seconds");
 				pm.makePersistent(scheduleLog);
 				processing = false;
 			}			
 		} catch (Exception e) {
-			log.debug("EXIT (EXCEPTION)");
+			log.debug("EXIT (EXCEPTION)" + e);
+			e.printStackTrace();
 			return;
 		} finally {			
 			pm.close();
