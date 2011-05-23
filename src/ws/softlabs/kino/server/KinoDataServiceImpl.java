@@ -1,14 +1,7 @@
 package ws.softlabs.kino.server;
 
-/**
- *    http://objectuser.wordpress.com/2009/07/04/17-minute-jdo/
- */
-		
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -22,6 +15,7 @@ import ws.softlabs.lib.kino.model.client.Show;
 import ws.softlabs.lib.kino.model.client.Theater;
 import ws.softlabs.lib.parser.server.KinovlruParser;
 import ws.softlabs.lib.util.client.DateUtils;
+import ws.softlabs.lib.util.client.DayComparator;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -37,108 +31,75 @@ public class KinoDataServiceImpl
 	private KinovlruParser 	parser      = new KinovlruParser(dataService);
 
 	public List<Theater> listTheaters() {
-		List<Theater> daoResults   = dataService.getTheaterList();
-		Set<Theater> parserResults = null;
+		log.debug("ENTER");
+		List<Theater> daoResults = dataService.getTheaterList();
 		if (daoResults != null && daoResults.size() > 0) {
 			log.debug("GOT THEATERS FROM -+= DATASTORE =+-");
 			return daoResults;
 		}
-		else 
-			try {
-				parserResults = parser.getTheaters();
-				log.debug("GOT THEATERS FROM -+= PARSER =+-");
-			}
-			catch(Exception ex) {
-				parserResults = null;
-			}
-		return new ArrayList<Theater>(parserResults);/**/
+		log.debug("EXIT");
+		return null;
 	}
 	public List<String>  listDays(Theater theater) {
+		log.debug("ENTER (theater = " + theater + ")");
 		List<String> daoResults = dataService.getShowDaysList(theater);
-		List<String> result 	= null;
 		if (daoResults != null && daoResults.size() > 0) {
-			result = sortDays(daoResults);
+			Collections.sort(daoResults, new DayComparator());
 			log.debug("GOT DAYS FROM -+= DATASTORE =+-");
 		}
-		else {
-			try {
-				List<String> set = parser.getTheaterShowDays(theater);
-				if (set != null) {
-					result = sortDays(set);
-					log.debug("GOT DAYS FROM -+= PARSER =+-");
-				}
-			}
-			catch(Exception ex) {
-				result = null;
-			}
-		}
-		return result;
+		log.debug("EXIT");
+		return daoResults;
 	}
 	public List<Object>  listShows(Theater theater, String date) {
-		log.debug("ENTER (theater = " + theater + ")");
+		log.debug("ENTER (theater = " + theater + ", day = " + date + ")");
 		List<Hall> halls = dataService.getTheaterHallList(theater);
 		List<Object> result = null;
-		if (halls == null || halls.isEmpty()) {
-			log.debug("CAN'T GET HALLS FROM DATASTORE");
-			try {
-				halls = new ArrayList<Hall>(parser.getHalls(theater));
-				log.debug("GOT HALLS FROM -+= PARSER =+-");
-			} catch(Exception ex) {
-				System.out.println(ex);
-				halls = null;
-			}
-		}
-		else
-			log.debug("GOT HALLS FROM -+= DATASTORE =+-");
-
+		
 		if (halls != null) {
+			log.debug("GOT HALLS FROM -+= DATASTORE =+-");
+		
+			int i = 1;
+			for(Hall hall : halls) {
+				log.info("HALL #" + i + ": " + hall.getId() + " - " + hall.getName() + " - " + hall.getHtml());
+				i++;
+			}
+			
 			result = new ArrayList<Object>();
 			for(Hall hall : halls) {
-				if (hall.getName() != null)
+				log.debug("fetching shows for hall '" + hall.getName() + "'");
+				if (hall.getName() != null) {
+					log.debug("added hall to result");
 					result.add(hall);
+				}
 				List<Show> shows = dataService.getShowList(hall, DateUtils.dateToMidnight(DateUtils.stringToDate(date)));
-				if (shows == null || shows.size() < 1)
-					try {
-						shows = new ArrayList<Show>(parser.getDayShows(date, hall));
-						log.debug("GOT SHOWS FROM -+= PARSER =+-");
-					} catch(Exception ex) {
-						shows = null;
-					}
-				else
+				if (shows != null && !shows.isEmpty()) {
 					log.debug("GOT SHOWS FROM -+= DATASTORE =+-");
-				if (shows != null) {
 					for(Show show : shows) {
+						log.debug(	"adding show '" + 
+									show.getTimeString() + " " + 
+									show.getMovie().getName() + "' to result");
 						result.add(show);
 					}
 				}
-				
 			}
 		}
 		return result;
 	}	
-	private List<String> sortDays(Collection<String> days) {
-		if (days == null) return null;
-		List<String> result = new ArrayList<String>(days);
-		Comparator<String> comparator = new Comparator<String>(){
-			public int compare(String s1, String s2) {
-				Date d1 = DateUtils.stringToDate(s1);
-				Date d2 = DateUtils.stringToDate(s2);
-				if (d1 != null)
-					return d1.compareTo(d2);
-				else if (d2 != null)
-					return d2.compareTo(d1);
-				else 
-					return 0;
-			}};
-		Collections.sort(result, comparator);
-		return result;
+	public List<Hall> listHalls() {  
+		// STUB
+		// for HALL serialization ***** DON'T DELETE
+		return null;
 	}
-	public List<Hall> stubListHall() {
-		return new ArrayList<Hall>();
+	public List<Show> listShows() {
+		// STUB
+		// for SHOW serialization ***** DON'T DELETE
+		return null;
 	}
-	public List<Show> stubListShow() {
-		return new ArrayList<Show>();
-	}
+
+	
+	/*******************************************************************/
+	/***********  T O O L S  **  F O R  **  T E S T I N G  *************/
+	/*******************************************************************/
 	public List<String> loadDataFromDB(String param) {
 		// "theaters", "halls" , "days", "movies", "shows", "clear"
 		if (param == null || param.isEmpty()) {
@@ -183,6 +144,7 @@ public class KinoDataServiceImpl
 			log.debug("clearing PMovies");
 			dataService.clearMovies();
 		}
+		
 		log.debug("EXIT");
 	}
 	public void loadTheaters() {

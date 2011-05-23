@@ -30,10 +30,6 @@ public class KinoApp implements EntryPoint {
 			public void onClick(ClickEvent event) {
 				Cell cellForEvent = gui.daysGrid.getCellForEvent(event);
 				gui.gui_eventDaysGridClicked(cellForEvent);
-		}}); /*
-		gui.loadDataButton.addClickHandler(new ClickHandler(){
-			  public void onClick(ClickEvent event) {
-				  gui.gui_eventLoadDataButtonClicked();
-		}}); /**/
+		}});
 	  }	  
 }

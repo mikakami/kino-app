@@ -12,7 +12,11 @@
   </servlet>  
   <servlet>
     <servlet-name>schedule</servlet-name>
-    <servlet-class>ws.softlabs.kino.server.schedule.ScheduledLoader</servlet-class>
+    <servlet-class>ws.softlabs.kino.server.tools.ScheduledLoader</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>sanitizer</servlet-name>
+    <servlet-class>ws.softlabs.kino.server.tools.Sanitizer</servlet-class>
   </servlet>
     
   <!-- servlet mapping -->
@@ -22,7 +26,11 @@
   </servlet-mapping>  
   <servlet-mapping>
     <servlet-name>schedule</servlet-name>
-    <url-pattern>/cron/load</url-pattern>
+    <url-pattern>/tools/load</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>sanitizer</servlet-name>
+    <url-pattern>/tools/clean</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->

@@ -1,10 +1,5 @@
 package ws.softlabs.kino.client;
 
-/*
- *  http://code.google.com/p/tatami/ - DoJo on GWT
- *  
- */
-
 import java.util.Date;
 import java.util.List;
 
@@ -88,14 +83,6 @@ public class KinoAppGUI {
 	}		
 
 	/* ==== GUI EVENTS ==== */
-	public void gui_eventLoadDataButtonClicked() {
-		if ( processing ) return;
-		status.setText("");
-		//status.setText("loading data...please wait...");
-		//loadingDialog.center();
-		kinoService.loadDataFromInternet();
-		processing = true;
-	}	
 	public void gui_eventTheaterGridClicked(Cell cellClicked) {
 		if ( processing ) return;		
 		if ((this.theaters.get(cellClicked.getRowIndex())).equals(currentTheater))
@@ -175,7 +162,6 @@ public class KinoAppGUI {
 		hide(showsPanel);
 		show(loadingImage);
 		kinoService.listShows(currentTheater, currentDay);
-		//show(contentsPanel);
 		show(scrollPanel);
 	}
 	/* shows */
@@ -245,7 +231,6 @@ public class KinoAppGUI {
 	}
 	public void service_eventLoadDataSuccess() {
 		processing = false;
-		//status.setText("data successfully loaded...");
 		status.setText("");
 		kinoService.listTheaters();
 	}
@@ -273,18 +258,14 @@ public class KinoAppGUI {
     private void placeWidgets() {
 		containerPanel = new DockLayoutPanel(Unit.PX);
 		containerPanel.addStyleName("main");
-
 		containerPanel.addNorth(headerPanel, 70);
 		containerPanel.addSouth(footerPanel, 30);
 		containerPanel.addEast(toolsPanel, 250);
 		containerPanel.addWest(theatersPanel, 200);
 		containerPanel.addNorth(statusPanel, 40);
 		containerPanel.add(scrollPanel);
-
 		show(containerPanel);
-		
 		RootLayoutPanel.get().add(containerPanel);
-		
 		//RootPanel.get(KINO_APP_HEADER_ROOT_PANEL).add(headerPanel);
         //RootPanel.get(KINO_APP_STATUS_ROOT_PANEL).add(statusPanel);
         //RootPanel.get(KINO_APP_THEATERS_ROOT_PANEL).add(theatersPanel);
@@ -350,7 +331,7 @@ public class KinoAppGUI {
 	    						};
 
     	toolsPanel	   = new VerticalPanel();
-  
+/*
 	    toolsPanel.add(new HTML("<span class=\"font02\">Инструменты</span>"));
 	    
 	    final FlexTable toolLinks = new FlexTable();
@@ -412,7 +393,7 @@ public class KinoAppGUI {
 			
 				
 		toolsPanel.add(toolLinks);
-		// schedule
+
 		toolsPanel.add(new Hyperlink("run cron job", "/cron/load"));
 		/**/
 		toolsPanel.addStyleName("tools");
@@ -467,36 +448,6 @@ public class KinoAppGUI {
 			daysGrid.getWidget(i, 0).removeStyleName("selected");
 		daysGrid.getWidget(idx, 0).addStyleName("selected");    	
     }
-    /*
-    private void createLogger() { /*
-    	final HTML html = new HTML();
-    	footerPanel.add(html);
-    	logger = Logger.getLogger(""); 
-    	// add the html widget somewhere in your code.
-    	logger.addHandler(new Handler() {
-    	  {
-    	    // set the formatter, in this case HtmlLogFormatter
-    	    setFormatter(new HtmlLogFormatter(true));
-    	    setLevel(Level.ALL);
-    	  }
-    	  @Override
-    	  public void publish(LogRecord record) {
-    	    if (!isLoggable(record)) {
-    	      Formatter formatter = getFormatter();
-    	      String msg = formatter.format(record);
-
-    	      html.setHTML(msg);
-    	    }
-    	  }
-    	  public void flush() {
-			// TODO Auto-generated method stub
-    	  }
-    	  public void close() throws SecurityException {
-			// TODO Auto-generated method stub
-    	  }
-    	});   
-    	logger.setLevel(Level.INFO); 
-    }/**/
     
     /* ==== PRIVATE STATIC FIELDS ==== */    
 	private static final String KINO_APP_HEADER_ROOT_PANEL   = "header";

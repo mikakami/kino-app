@@ -10,23 +10,11 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class KinoServiceDelegate {
-	  private KinoDataServiceAsync kinoService = 
+	  
+	private KinoDataServiceAsync kinoService = 
 		  GWT.create(KinoDataService.class);
+	  
 	  KinoAppGUI gui;
-
-	  void loadDataFromInternet() { /*
-		  kinoService.loadDataFromInternet(
-					new AsyncCallback<Void> () {
-						public void onFailure(Throwable caught) {
-							gui.service_eventLoadDataFailed(caught);
-						}
-			
-						public void onSuccess(Void result) {
-							gui.service_eventLoadDataSuccessful();
-						}
-					}//end of inner class 
-		  );//end of method call.	/**/
-	  }
 
 	  void listTheaters() {
 		  kinoService.listTheaters(
@@ -54,21 +42,6 @@ public class KinoServiceDelegate {
 				  }//end of inner class
 		  );//end of method call.              
 	  }	  
-	  
-	  /*
-	  void listHalls(final iTheater theater) {
-		  kinoService.listHalls(
-				  theater,
-				  new AsyncCallback<List<iHall>>() {
-					public void onFailure(Throwable caught) {
-						gui.service_eventListHallsFailed(caught);
-					}
-					public void onSuccess(List<iHall> result) {
-						gui.service_eventListHallsSuccess(result);
-					}
-				  }//end of inner class
-		  );//end of method call.              
-	  }/**/	  
 	  void listShows(final Theater theater, 
 			  		 final String day) {
 		  kinoService.listShows(
@@ -84,6 +57,10 @@ public class KinoServiceDelegate {
 				  }//end of inner class
 		  );//end of method call.	            
 	  }	 
+	  
+	  /***************************************/
+	  /*************** TOOLS *****************/
+	  /***************************************/
 	  public void loadDataFromDB(String string) {
 		  kinoService.loadDataFromDB(
 			  		string, 

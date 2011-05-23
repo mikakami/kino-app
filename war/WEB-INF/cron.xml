@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cronentries>
 	<cron>
-		<url>/cron/load</url>
+		<url>/tools/load</url>
 		<description>parse shows data from internet</description>
-		<schedule>every 2 minutes</schedule>
+		<schedule>every 3 hours</schedule>
 	</cron>
+	<!--  
+	<cron>
+		<url>/tools/clean</url>
+		<description>clean datastore</description>
+		<schedule>every 10 minutes</schedule>
+	</cron>
+	-->
 </cronentries>

@@ -1,4 +1,4 @@
-package ws.softlabs.kino.server.schedule;
+package ws.softlabs.kino.server.tools;
 
 import java.util.Date;
 
@@ -22,12 +22,12 @@ public class ScheduleLog implements StoreCallback {
 	@Persistent
 	public long lastTimeTS;
 	@Persistent
-	public Date date;
+	public Date lastRunDate;
 	
 	public ScheduleLog() {
 	}
 	@Override
 	public void jdoPreStore() {
-		date = new Date(lastRunTS);
+		lastRunDate = new Date(lastRunTS);
 	}		
 }

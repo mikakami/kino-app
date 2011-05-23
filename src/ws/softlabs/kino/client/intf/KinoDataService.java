@@ -12,15 +12,12 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("kino")
 public interface KinoDataService extends RemoteService {
 
-	//void loadDataFromInternet();
-
 	List<Theater> 	listTheaters();
 	List<String>  	listDays(Theater theater);
 	List<Object>  	listShows(Theater t, String day);
-	
-	/* stubs - perhaps should be removed */
-	List<Hall>	  	stubListHall();
-	List<Show>	  	stubListShow();
+
+	List<Hall>		listHalls();  // for HALL serialization
+	List<Show>		listShows();  // for SHOW serialization
 	
 	/* tools */
 	List<String>  	loadDataFromDB(String param);

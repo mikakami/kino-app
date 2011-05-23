@@ -44,7 +44,6 @@ public class ListDialogBox extends DialogBox {
 		
 		sPanel.setVisible(true);
 		sPanel.add(vPanel);
-		//sPanel.setHeight("100%");
 		this.add(sPanel);
 		this.setText("RAW data from DB");
 	}	
