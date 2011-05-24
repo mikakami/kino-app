@@ -2,6 +2,7 @@ package ws.softlabs.kino.server;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -71,7 +72,10 @@ public class KinoDataServiceImpl
 					log.debug("added hall to result");
 					result.add(hall);
 				}
-				List<Show> shows = dataService.getShowList(hall, DateUtils.dateToMidnight(DateUtils.stringToDate(date)));
+				long timeOffset = 1000*60*60*4; // +4 hours
+				Date midnight = DateUtils.dateToMidnight(DateUtils.stringToDate(date));
+				Date since    = new Date(midnight.getTime() + timeOffset);
+				List<Show> shows = dataService.getShowList(hall, since);
 				if (shows != null && !shows.isEmpty()) {
 					log.debug("GOT SHOWS FROM -+= DATASTORE =+-");
 					for(Show show : shows) {
