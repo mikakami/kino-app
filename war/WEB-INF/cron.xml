@@ -3,7 +3,7 @@
 	<cron>
 		<url>/tools/load</url>
 		<description>parse shows data from internet</description>
-		<schedule>every 3 hours</schedule>
+		<schedule>every 30 minutes</schedule>
 	</cron>
 	<!--  
 	<cron>
