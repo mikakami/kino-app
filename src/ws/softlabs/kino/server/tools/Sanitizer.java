@@ -38,5 +38,7 @@ public class Sanitizer extends HttpServlet {
 		}
 		
 		log.debug("EXIT");
+		
+		resp.sendRedirect("/");
 	}
 }
