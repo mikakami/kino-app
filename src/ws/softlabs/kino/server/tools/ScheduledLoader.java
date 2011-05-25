@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ws.softlabs.lib.kino.dao.server.intf.DataService;
 import ws.softlabs.lib.kino.dao.server.service.pmf.PMF;
@@ -27,9 +28,9 @@ import ws.softlabs.lib.parser.server.KinovlruParser;
 public class ScheduledLoader extends HttpServlet {
 		
 	private static final Logger log = 
-		Logger.getLogger("kino.gwt.service." + ScheduledLoader.class.getSimpleName());
+		LoggerFactory.getLogger("kino.gwt.service." + ScheduledLoader.class.getSimpleName());
 	private static final Logger log2 = 
-		Logger.getLogger("kino.gwt.service." + ScheduledLoader.class.getSimpleName() + ".2");
+		LoggerFactory.getLogger("kino.gwt.service." + ScheduledLoader.class.getSimpleName() + ".2");
 	
 	private static boolean  processing  = false;
 	private DataService 	dataService = new PMFModelDataService();
@@ -129,7 +130,7 @@ public class ScheduledLoader extends HttpServlet {
 		log.debug("ENTER"); 
 		try {
 			if (theater != null) {
-				log2.debug(theater);
+				log2.debug(theater.toString());
 				List<String> days = parser.getTheaterShowDays(theater);
 				if (days != null) {
 					for(String d : days) {

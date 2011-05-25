@@ -6,7 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ws.softlabs.kino.client.intf.KinoDataService;
 import ws.softlabs.lib.kino.dao.server.intf.DataService;
@@ -26,7 +27,7 @@ public class KinoDataServiceImpl
 				implements KinoDataService {
 
 	private static final Logger log = 
-		Logger.getLogger("kino.gwt.service." + KinoDataServiceImpl.class.getSimpleName());
+		LoggerFactory.getLogger("kino.gwt.service." + KinoDataServiceImpl.class.getSimpleName());
 	
 	private DataService 	dataService = new PMFModelDataService();
 	private KinovlruParser 	parser      = new KinovlruParser(dataService);

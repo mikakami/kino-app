@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ws.softlabs.lib.kino.dao.server.service.pmf.PMF;
 import ws.softlabs.lib.kino.dao.server.service.pmf.PMFModelDataService;
@@ -18,7 +19,7 @@ import ws.softlabs.lib.kino.dao.server.service.pmf.PMFModelDataService;
 public class Sanitizer extends HttpServlet {
 
 	private static final Logger log = 
-		Logger.getLogger("kino.gwt.service." + Sanitizer.class.getSimpleName());
+		LoggerFactory.getLogger("kino.gwt.service." + Sanitizer.class.getSimpleName());
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
 									throws ServletException, IOException {
