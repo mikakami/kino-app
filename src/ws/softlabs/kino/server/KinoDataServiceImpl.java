@@ -15,6 +15,7 @@ import ws.softlabs.lib.kino.model.client.Hall;
 import ws.softlabs.lib.kino.model.client.Show;
 import ws.softlabs.lib.kino.model.client.Theater;
 import ws.softlabs.lib.parser.server.KinovlruParser;
+import ws.softlabs.lib.util.client.Constants;
 import ws.softlabs.lib.util.client.DateUtils;
 import ws.softlabs.lib.util.client.DayComparator;
 
@@ -72,9 +73,8 @@ public class KinoDataServiceImpl
 					log.debug("added hall to result");
 					result.add(hall);
 				}
-				long timeOffset = 1000*60*60*4; // +4 hours
 				Date midnight = DateUtils.dateToMidnight(DateUtils.stringToDate(date));
-				Date since    = new Date(midnight.getTime() + timeOffset);
+				Date since    = new Date(midnight.getTime() + Constants.dayOffset);
 				List<Show> shows = dataService.getShowList(hall, since);
 				if (shows != null && !shows.isEmpty()) {
 					log.debug("GOT SHOWS FROM -+= DATASTORE =+-");
@@ -89,12 +89,12 @@ public class KinoDataServiceImpl
 		}
 		return result;
 	}	
-	public List<Hall> listHalls() {  
+	public List<Hall> 	 listHalls() {  
 		// STUB
 		// for HALL serialization ***** DON'T DELETE
 		return null;
 	}
-	public List<Show> listShows() {
+	public List<Show> 	 listShows() {
 		// STUB
 		// for SHOW serialization ***** DON'T DELETE
 		return null;
