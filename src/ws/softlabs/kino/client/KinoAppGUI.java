@@ -154,15 +154,16 @@ public class KinoAppGUI {
 			}
 			currentDay = this.days.get(0);
 			selectDay(0);
+			hide(showsPanel);
+			kinoService.listShows(currentTheater, currentDay);
+			show(scrollPanel);
 		}
 		else {
 			status.setText( "no data in response to 'listDays'");
 			currentDay = null;
+			hide(loadingImage);
+			hide(scrollPanel);
 		}	
-		hide(showsPanel);
-		show(loadingImage);
-		kinoService.listShows(currentTheater, currentDay);
-		show(scrollPanel);
 	}
 	/* shows */
 	public void service_eventListShowsFailed(Throwable caught) {
@@ -219,8 +220,10 @@ public class KinoAppGUI {
  			}
 			showsPanel.setVisible(true);
 		}
-		else 
+		else {
 			status.setText( "no data in response to 'listShows'");
+			
+		}
 		hide(loadingImage);
 	}
 	/* dataLoad */
