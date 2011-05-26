@@ -22,6 +22,7 @@ import ws.softlabs.lib.kino.model.client.Hall;
 import ws.softlabs.lib.kino.model.client.Show;
 import ws.softlabs.lib.kino.model.client.Theater;
 import ws.softlabs.lib.parser.server.KinovlruParser;
+import ws.softlabs.lib.util.client.DateUtils;
 
 @SuppressWarnings("serial")
 public class ScheduledLoader extends HttpServlet {
@@ -138,6 +139,7 @@ public class ScheduledLoader extends HttpServlet {
 						if (halls != null)
 						for(Hall h : halls) {
 							log2.debug("\t\t" + h);
+							clearShows(h, d);
 							List<Show> shows = new ArrayList<Show>(parser.getDayShows(d, h));
 							if (shows != null)
 								for(Show show : shows)
@@ -152,28 +154,9 @@ public class ScheduledLoader extends HttpServlet {
 		log.debug("EXIT");
 	}
 	
-	/*
-	private void loadDataFromInternet() {
-		log.debug("ENTER");
-		try {
-			Set<Theater> theaters = parser.getTheaters();
-			if (theaters != null)
-			for (Theater t : theaters) {
-				List<String> days = parser.getTheaterShowDays(t);
-				if (days != null) {
-					for(String d : days) {
-						Set<Hall> halls = parser.getHalls(t);
-						if (halls != null)
-						for(Hall h : halls) {
-							parser.getDayShows(d, h);
-						}
-					}
-				}
-			}
-		}
-		catch(Exception ex) {			
-			log.debug("EXCEPTION");
-		}
-		log.debug("EXIT");
-	}/**/
+	private void clearShows(Hall hall, String day) {
+		log.debug("ENTER"); 
+		dataService.clearShows(hall ,DateUtils.stringToDate(day));
+		log.debug("EXIT");		
+	}
 }
