@@ -1,4 +1,5 @@
 .settings/com.google.gwt.eclipse.core.prefs
+/tools/pom
 /target
 /war/kino
 /war/WEB-INF/appengine-generated

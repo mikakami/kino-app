@@ -1,0 +1,11 @@
+REBUILD & DEPLOY:
+    mvn gwt:clean clean gae:deploy
+
+RUN LOCAL GAE SERVER:
+    mvn gae:run
+
+RUN GWT DEV MODE:
+    mvn gwt:clean clean package gwt:compile gwt:run
+
+
+
