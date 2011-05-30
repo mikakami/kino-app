@@ -9,6 +9,12 @@
 	<packaging>war</packaging>
 	<name>KinoSite</name>
 
+  <parent>
+    <groupId>ws.softlabs.app</groupId>
+    <artifactId>kino-application</artifactId>
+    <version>0.0.5</version>
+  </parent>
+
 	<!-- Specify hard-coded project properties here -->
 	<properties>
 		<app.name>${project.artifactId}</app.name>
@@ -374,7 +380,7 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
-							<source>tools/utils.groovy</source>
+							<source>${basedir}/tools/utils.groovy</source>
 						</configuration>
 					</execution>
 				</executions>
